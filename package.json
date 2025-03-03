@@ -1,13 +1,15 @@
 {
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "name": "curso-expressjs",
   "version": "1.0.0",
   "description": "curso express.js",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
+    "dev": "node --watch app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
