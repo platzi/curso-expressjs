@@ -127,6 +127,23 @@ app.put('/users/:id', (req, res) => {
   });
 });
 
+app.delete('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+  fs.readFile(usersFilePath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error con conexión de datos.' });
+    }
+    let users = JSON.parse(data);
+    users = users.filter(user => user.id !== userId);
+    fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), err => {
+      if (err) {
+        return res.status(500).json({ error: 'Error al eliminar usuario.' });
+      }
+      res.status(204).send();
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor: http://localhost:${PORT}`);
 });
