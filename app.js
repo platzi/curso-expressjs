@@ -1,5 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+
+const { validateUser } = require('./utils/validation');
+
 const bodyParser = require('body-parser');
 
 const fs = require('fs');
@@ -79,6 +82,12 @@ app.post('/users', (req, res) => {
       return res.status(500).json({ error: 'Error con conexión de datos.' });
     }
     const users = JSON.parse(data);
+
+    const validation = validateUser(newUser, users);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+
     users.push(newUser);
     fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), err => {
       if (err) {
@@ -98,6 +107,12 @@ app.put('/users/:id', (req, res) => {
       return res.status(500).json({ error: 'Error con conexión de datos.' });
     }
     let users = JSON.parse(data);
+
+    const validation = validateUser(updatedUser, users);
+    if (!validation.isValid) {
+      return res.status(400).json({ error: validation.error });
+    }
+
     users = users.map(user =>
       user.id === userId ? { ...user, ...updatedUser } : user
     );
