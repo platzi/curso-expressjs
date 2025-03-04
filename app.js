@@ -89,6 +89,29 @@ app.post('/users', (req, res) => {
   });
 });
 
+app.put('/users/:id', (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+  const updatedUser = req.body;
+
+  fs.readFile(usersFilePath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).json({ error: 'Error con conexión de datos.' });
+    }
+    let users = JSON.parse(data);
+    users = users.map(user =>
+      user.id === userId ? { ...user, ...updatedUser } : user
+    );
+    fs.writeFile(usersFilePath, JSON.stringify(users, null, 2), err => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ error: 'Error al actualizar el usuario' });
+      }
+      res.json(updatedUser);
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor: http://localhost:${PORT}`);
 });
