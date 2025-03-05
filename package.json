@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "@prisma/client": "^6.4.1",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
   },
   "name": "curso-expressjs",
   "version": "1.0.0",
@@ -17,5 +19,8 @@
     "['expressjs']"
   ],
   "author": "Oscar Barajas <oscar@platzi.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prisma": "^6.4.1"
+  }
 }
