@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "@prisma/client": "^6.4.1",
+    "bcryptjs": "^3.0.2",
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.3"
   },
   "name": "curso-expressjs",
