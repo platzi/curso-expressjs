@@ -1,8 +1,8 @@
+const reservationService = require('../services/reservationService');
+
 exports.createReservation = async (req, res) => {
   try {
-    const reservation = await listReservationsService.createReservation(
-      req.body
-    );
+    const reservation = await reservationService.createReservation(req.body);
     res.status(201).json(reservation);
   } catch (error) {
     res.status(400).json({ error: error.message });
